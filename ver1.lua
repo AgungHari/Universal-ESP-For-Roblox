@@ -1,17 +1,16 @@
--- ESP Script with notification when activated
 
 local players = game:GetService("Players")
 local runService = game:GetService("RunService")
-local starterGui = game:GetService("StarterGui")  -- Digunakan untuk menampilkan notifikasi
+local starterGui = game:GetService("StarterGui")  
 local localPlayer = players.LocalPlayer
-local distanceThreshold = 20 -- Batas jarak untuk mengubah warna (dalam satuan Roblox)
+local distanceThreshold = 20
 
--- Fungsi untuk menampilkan notifikasi
+
 local function showNotification(title, text)
     starterGui:SetCore("SendNotification", {
         Title = title;
         Text = text;
-        Duration = 5;  -- Lama notifikasi ditampilkan (dalam detik)
+        Duration = 5; 
     })
 end
 
@@ -20,7 +19,7 @@ local function createESP(player)
     highlight.Name = "ESPHighlight"
     highlight.FillTransparency = 0.5
     highlight.OutlineTransparency = 0.5
-    highlight.OutlineColor = Color3.fromRGB(0, 0, 0) -- Warna outline hitam
+    highlight.OutlineColor = Color3.fromRGB(0, 0, 0) 
 
     player.CharacterAdded:Connect(function(character)
         highlight.Adornee = character
@@ -52,15 +51,15 @@ local function updateESP()
             
             if player.Team == localPlayer.Team then
                 if distance <= distanceThreshold then
-                    highlight.FillColor = Color3.fromRGB(0, 0, 255) -- Warna biru untuk rekan satu tim yang dekat
+                    highlight.FillColor = Color3.fromRGB(0, 0, 255) 
                 else
-                    highlight.FillColor = Color3.fromRGB(0, 255, 255) -- Warna cyan untuk rekan satu tim yang jauh
+                    highlight.FillColor = Color3.fromRGB(0, 255, 255) 
                 end
             else
                 if distance <= distanceThreshold then
-                    highlight.FillColor = Color3.fromRGB(255, 0, 0) -- Warna merah untuk musuh yang dekat
+                    highlight.FillColor = Color3.fromRGB(255, 0, 0) 
                 else
-                    highlight.FillColor = Color3.fromRGB(255, 165, 0) -- Warna oranye untuk musuh yang jauh
+                    highlight.FillColor = Color3.fromRGB(255, 165, 0)
                 end
             end
         end
