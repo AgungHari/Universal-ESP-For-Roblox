@@ -3,7 +3,7 @@ local runService = game:GetService("RunService")
 local starterGui = game:GetService("StarterGui")  
 local localPlayer = players.LocalPlayer
 local distanceThreshold = 20
-local silentAimRange = 1000  -- Jarak maksimum untuk silent aim yang sangat jauh
+local silentAimRange = 1000  
 
 local function showNotification(title, text)
     starterGui:SetCore("SendNotification", {
@@ -85,13 +85,11 @@ local function applySilentAim()
         local target = enemies[1]  -- Pilih target pertama dari daftar musuh
 
         -- Ambil senjata dari pemain lokal
-        local weapon = localPlayer.Character:FindFirstChildOfClass("Tool") -- Atau cari senjata sesuai implementasi game-mu
+        local weapon = localPlayer.Character:FindFirstChildOfClass("Tool") 
         if weapon and weapon:IsA("Tool") then
-            -- Misalnya, jika menggunakan senjata yang memiliki fungsi setTarget, ganti dengan fungsi yang sesuai
+
             local humanoidRootPart = target.Character:FindFirstChild("HumanoidRootPart")
             if humanoidRootPart then
-                -- Ganti dengan kode yang mengarahkan senjata ke arah HumanoidRootPart
-                -- Contoh pseudo-kode; implementasikan sesuai dengan sistem senjata di game-mu
                 weapon:SetAttribute("AimAt", humanoidRootPart.Position)
             end
         end
