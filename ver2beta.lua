@@ -3,7 +3,7 @@ local runService = game:GetService("RunService")
 local starterGui = game:GetService("StarterGui")  
 local localPlayer = players.LocalPlayer
 local distanceThreshold = 20
-local silentAimRange = 50  -- Jarak maksimum untuk silent aim
+local silentAimRange = 1000  -- Jarak maksimum untuk silent aim yang sangat jauh
 
 local function showNotification(title, text)
     starterGui:SetCore("SendNotification", {
@@ -81,15 +81,18 @@ end
 local function applySilentAim()
     local enemies = getVisibleEnemies()
     if #enemies > 0 then
-        -- Ganti dengan kode yang mengarahkan senjata ke arah musuh
-        -- Ini adalah contoh pseudo-kode; implementasikan sesuai dengan sistem senjata di game-mu
+        -- Ambil salah satu musuh untuk dijadikan target
+        local target = enemies[1]  -- Pilih target pertama dari daftar musuh
+
+        -- Ambil senjata dari pemain lokal
         local weapon = localPlayer.Character:FindFirstChildOfClass("Tool") -- Atau cari senjata sesuai implementasi game-mu
         if weapon and weapon:IsA("Tool") then
             -- Misalnya, jika menggunakan senjata yang memiliki fungsi setTarget, ganti dengan fungsi yang sesuai
-            for _, enemy in pairs(enemies) do
-                -- Misalnya, jika hanya ingin menargetkan satu musuh pada satu waktu, bisa menggunakan enemy[1]
-                weapon:SetAttribute("AimAt", enemy.Character.HumanoidRootPart.Position)
-                break -- Hanya menargetkan satu musuh jika diinginkan
+            local humanoidRootPart = target.Character:FindFirstChild("HumanoidRootPart")
+            if humanoidRootPart then
+                -- Ganti dengan kode yang mengarahkan senjata ke arah HumanoidRootPart
+                -- Contoh pseudo-kode; implementasikan sesuai dengan sistem senjata di game-mu
+                weapon:SetAttribute("AimAt", humanoidRootPart.Position)
             end
         end
     end
@@ -119,4 +122,4 @@ runService.RenderStepped:Connect(function()
 end)
 
 -- Menampilkan notifikasi bahwa script sudah aktif
-showNotification("Script Active", "ESP script telah diaktifkan dan Silent Aim diatur untuk musuh.")
+showNotification("AgungHari", "ESP dan Silent Aim Active.")
